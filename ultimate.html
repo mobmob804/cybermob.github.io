@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Life Ultimate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="frame">
+    <!-- СТОРІНКА ІНТРО 1 -->
+    <div id="intro-screen-1" class="screen active" style="text-align: center; padding: 20px 10px;">
+        <h2 style="color: #00f0ff; margin-bottom: 15px;">👋 Привіт, тестере!</h2>
+        <p style="font-size: 13px; line-height: 1.5; color: #ddd; margin-bottom: 25px;">
+            Дякую, що не пройшов повз і зайшов у мою гру! Скажу чесно, я робив її просто на телефоні за 4-5 годин. Дуже радий, що ти тут! 🍺😎
+        </p>
+        <div style="flex-grow:1;"></div>
+        <button class="btn-act" onclick="nextIntro(2)">Далі ➡️</button>
+    </div>
+
+    <!-- СТОРІНКА ІНТРО 2 -->
+    <div id="intro-screen-2" class="screen" style="text-align: center; padding: 20px 10px;">
+        <h2 style="color: #ff0055; margin-bottom: 10px;">💡 Маніфест розробника</h2>
+        <p style="font-size: 12px; line-height: 1.4; color: #ddd; margin-bottom: 15px;">
+            Цим проєктом я хотів показати: абсолютно не важливо, який у тебе девайс чи потужний ПК. Головне — щоб у тебе була фантазія та бажання створювати! Приємної гри, бро! 🚀✨
+        </p>
+        <p style="font-size: 11px; color: #ff9900; margin-bottom: 20px; font-style: italic;">
+            P.S. Це тільки демка! 😉
+        </p>
+        <div style="flex-grow:1;"></div>
+        <button class="btn-act" onclick="showMainMenu()" style="background: #00ff66; color: #000;">🎮 У головне меню</button>
+    </div>
+
+    <!-- ГОЛОВНЕ МЕНЮ -->
+    <div id="main-menu" class="screen" style="text-align: center; padding-top: 15px;">
+        <h1 style="color: #00f0ff; font-size: 22px; margin-bottom: 2px; text-shadow: 0 0 10px #00f0ff;">CYBER LIFE</h1>
+        <p style="color: #ff0055; margin-bottom: 10px; font-size: 11px;">Ultimate Mobile Edition</p>
+        
+        <!-- СТІКМЕН З РУКАМИ, НОГАМИ ТА ПИВОМ -->
+        <div class="stickman-box">
+            <div class="stickman-head">
+                <div class="stickman-face">O‿O</div>
+            </div>
+            <div class="stickman-torso">
+                <div class="arm left-arm"></div>
+                <div class="arm right-arm"></div>
+                <div class="beer-bottle">🍺</div>
+            </div>
+            <div class="stickman-legs">
+                <div class="leg left-leg"></div>
+                <div class="leg right-leg"></div>
+            </div>
+        </div>
+
+        <button class="btn-act" onclick="startGame()" style="font-size: 15px; padding: 14px; background: #00ff66; color: #000; margin-top: 15px;">🚀 ПОЧАТИ ГРУ</button>
+        <button class="btn-sec" onclick="toggleMusic()" id="music-toggle-btn" style="margin-top: 5px;">🎵 Музика: ВИМК</button>
+        <!-- КНОПКА ДОНАТУ -->
+        <button class="btn-sec" onclick="supportDev()" style="margin-top: 5px; border-color: #ff9900; color: #ff9900;">☕ Підтримати розробника 😊 (за бажанням)</button>
+    </div>
+
+    <!-- ІГРОВИЙ ІНТЕРФЕЙС -->
+    <div id="game-interface" style="display: none;">
+        <div class="time-box"><span id="w-day">Понеділок</span>, <span id="time-str">08:00</span> | День <span id="d">1</span></div>
+        <div class="bar">
+            <div>💰 Грн: <span id="m">400</span></div>
+            <div>⚡ FPS: <span id="f">0</span></div>
+            <div>🍔 Голод: <span id="h">90</span>%</div>
+            <div>💧 Спрага: <span id="t">90</span>%</div>
+            <div>🔋 Енерг: <span id="e">40</span>%</div>
+            <div>❤️ Здоров: <span id="hp">100</span>%</div>
+        </div>
+
+        <!-- 1. КІМНАТА -->
+        <div id="room" class="screen active">
+            <h2>🏠 Твоя Кімната</h2>
+            <div class="banner" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&auto=format&fit=crop&q=60');"></div>
+            <button onclick="nav('pc')">💻 Сісти за ПК (+2 год)</button>
+            <button class="btn-sec" onclick="rest()">🛏️ Лягти спати (з 19:00)</button>
+            <button class="btn-sec" onclick="shower()">🚿 Душ (+30 хв)</button>
+            <button class="btn-sec" onclick="sport()">🏋️ Зарядка (+1 год)</button>
+            <button class="btn-act" onclick="nav('kitchen')">🍳 Кухня</button>
+            <button class="btn-act" onclick="goOut()">🚪 На вулицю (10 хв)</button>
+        </div>
+
+        <!-- 2. ПК ТА СЕРВІСИ -->
+        <div id="pc" class="screen">
+            <h2>💻 Мережевий ПК</h2>
+            <p>Залізо: <span id="gpu" style="color:#00f0ff;">Базовий</span> | Клік: +<span id="cp">1</span> FPS</p>
+            <button onclick="clickPC()">🎮 Клікер: Фармити FPS (30 хв)</button>
+            <button class="btn-sec" onclick="nav('pcshop')">🛒 Магазин заліза «CyberGabe»</button>
+            <button class="btn-sec" onclick="nav('gamestore')">🎮 Ігровий магазин (Cyber-Store)</button>
+            <button class="btn-sec" onclick="nav('cybermail')">✉️ Пошта (Cyber.mail) <span id="mail-badge" style="color:#ff0055; display:none;">●</span></button>
+            <button class="btn-sec" onclick="toggleSnake()" id="snake-btn">🐍 Змійка</button>
+            <button class="btn-sec" onclick="hackGame()">🔓 Хакерський взлом (1 год)</button>
+            <button class="btn-sec" onclick="studyRemote()" id="rem-study-btn" style="display:none;">💻 Дистанційне навчання (Субота)</button>
+
+            <div id="snake-box" style="display:none; text-align:center;">
+                <canvas id="snake-canvas" width="180" height="120"></canvas>
+                <div class="snake-ctrls">
+                    <div></div><button onclick="setDir('UP')">⬆️</button><div></div>
+                    <button onclick="setDir('LEFT')">⬅️</button>
+                    <button onclick="setDir('DOWN')">⬇️</button>
+                    <button onclick="setDir('RIGHT')">➡️</button>
+                </div>
+            </div>
+
+            <div style="flex-grow:1;"></div>
+            <button class="btn-act" onclick="leavePC()">⬅️ Встати з-за ПК</button>
+        </div>
+
+        <!-- МАГАЗИН ЗАЛІЗА -->
+        <div id="pcshop" class="screen">
+            <h2>🛒 Магазин «CyberGabe»</h2>
+            <div class="grid">
+                <div class="card"><b>GTX 1050 Ti</b><br>150 FPS (+3)<br><button class="btn-sm" onclick="buyGPU('GTX 1050 Ti', 150, 3)">Купити</button></div>
+                <div class="card"><b>RTX 3060</b><br>400 FPS (+10)<br><button class="btn-sm" onclick="buyGPU('RTX 3060', 400, 10)">Купити</button></div>
+            </div>
+            <button class="btn-act" onclick="leavePCShop()">💻 Назад до ПК</button>
+        </div>
+
+        <!-- ІГРОВИЙ МАГАЗИН CYBER-STORE -->
+        <div id="gamestore" class="screen">
+            <h2>🎮 Cyber-Store (Ігри)</h2>
+            <div class="grid">
+                <div class="card"><b>Cyberpunk 2077</b><br>500 грн<br><button class="btn-sm" onclick="buyGame('Cyberpunk 2077', 500)">Купити</button></div>
+                <div class="card"><b>GTA VI (Rip)</b><br>900 грн<br><button class="btn-sm" onclick="buyGame('GTA VI', 900)">Купити</button></div>
+            </div>
+            <p style="margin-top:8px;">Придбано ігор: <span id="games-count">0</span></p>
+            <button class="btn-act" onclick="nav('pc')">💻 Назад</button>
+        </div>
+
+        <!-- ПОШТА CYBER.MAIL -->
+        <div id="cybermail" class="screen">
+            <h2>✉️ Cyber.mail</h2>
+            <div id="mail-list" style="font-size:11px; margin-bottom:8px; background:#1c1c24; padding:6px; border-radius:6px; min-height:100px;">
+                Повідомлень поки немає.
+            </div>
+            <button class="btn-act" onclick="nav('pc')">💻 Назад</button>
+        </div>
+
+        <!-- 3. КУХНЯ -->
+        <div id="kitchen" class="screen">
+            <h2>🍳 Кухня</h2>
+            <div class="banner" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400&auto=format&fit=crop&q=60');"></div>
+            <div class="grid">
+                <div class="card"><b>Чайник</b><br>Пачок: <span id="tc">2</span><br><button class="btn-sm" onclick="makeTea()">Чай</button></div>
+                <div class="card"><b>Мівіна</b><br>Сира: <span id="mc">1</span><br><button class="btn-sm" onclick="cookMiv()">Варити</button></div>
+                <div class="card" style="grid-column:span 2;"><b>Холодильник</b><br>Їжа: <span id="fc">2</span> | Пиво: <span id="bc">1</span><br>
+                    <button class="btn-sm" onclick="eat()">З'їсти</button>
+                    <button class="btn-sm" onclick="drink()" style="background:#ff9900;">Пиво</button>
+                </div>
+            </div>
+            <button class="btn-act" onclick="nav('room')">🏠 У кімнату</button>
+        </div>
+
+        <!-- 4. ВУЛИЦЯ -->
+        <div id="street" class="screen">
+            <h2>🚪 Сільська Вулиця</h2>
+            <div class="banner" style="background-image: url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=400&auto=format&fit=crop&q=60');"></div>
+            <button onclick="tryShop()">🛒 Супермаркет (06:00 - 22:00, неділя вих.)</button>
+            <button onclick="nav('pharmacy')">💊 Аптека</button>
+            <button onclick="nav('casino')" style="background:#ff9900; color:#000;">🎰 Казино / Слоти & Рулетка</button>
+            <button onclick="nav('college')">🎓 Коледж (Пн-Пт)</button>
+            <button onclick="nav('work')">🛠️ Біржа праці (Робота)</button>
+            <button onclick="nav('fish')">🎣 Рибалка</button>
+            <button class="btn-act" onclick="goHome()">🏠 Додому (10 хв)</button>
+        </div>
+
+        <!-- 5. СУПЕРМАРКЕТ -->
+        <div id="shop" class="screen">
+            <h2>🛒 Супермаркет</h2>
+            <div class="grid">
+                <div class="card">Мівіна (25 грн)<button class="btn-sm" onclick="buy('miv', 25)">Купити</button></div>
+                <div class="card">Чай (30 грн)<button class="btn-sm" onclick="buy('tea', 30)">Купити</button></div>
+                <div class="card">Чіпси (40 грн)<button class="btn-sm" onclick="buy('chips', 40)">Купити</button></div>
+                <div class="card">Пиво (50 грн)<button class="btn-sm" onclick="buy('beer', 50)">Купити</button></div>
+            </div>
+            <button class="btn-act" onclick="nav('street')">🚶 На вулицю</button>
+        </div>
+
+        <!-- 6. АПТЕКА -->
+        <div id="pharmacy" class="screen">
+            <h2>💊 Аптека</h2>
+            <div class="grid">
+                <div class="card">Вітаміни (100 грн)<button class="btn-sm" onclick="buyMed(100)">Купити</button></div>
+                <div class="card">Антибіотик (200 грн)<button class="btn-sm" onclick="buyMed(200)">Купити</button></div>
+            </div>
+            <p>Ліків: <span id="medc">0</span></p>
+            <button class="btn-sm" onclick="useMed()" style="width:100%; background:#00f0ff; color:#000;">Прийняти ліки</button>
+            <div style="flex-grow:1;"></div>
+            <button class="btn-act" onclick="nav('street')">🚶 На вулицю</button>
+        </div>
+
+        <!-- КАЗИНО (СЛОТИ ТА РУЛЕТКА) -->
+        <div id="casino" class="screen">
+            <h2>🎰 Казино</h2>
+            
+            <div class="mini-box" style="background:#000; border:2px solid #ff0055; padding:10px; margin:5px 0;">
+                <p style="color:#00f0ff; margin-bottom:5px; font-weight:bold;">🎰 Однорукий Бандит (50 грн)</p>
+                <div class="slot-container">
+                    <div class="slot-item" id="s1">🎰</div>
+                    <div class="slot-divider">|</div>
+                    <div class="slot-item" id="s2">🎰</div>
+                    <div class="slot-divider">|</div>
+                    <div class="slot-item" id="s3">🎰</div>
+                </div>
+                <button id="spin-btn" onclick="spinSlots()" style="background:#ff0055; color:#fff; font-size:12px; margin-top:8px;">🎰 КРУТИТИ СЛОТИ</button>
+            </div>
+
+            <div class="mini-box" style="background:#000; border:2px solid #00f0ff; padding:10px; margin:5px 0;">
+                <p style="color:#00ff66; margin-bottom:5px; font-weight:bold;">🎡 Рулетка (100 грн)</p>
+                <div id="roulette-wheel" style="font-size:24px; font-weight:bold; height:35px; display:flex; align-items:center; justify-content:center; color:#fff;">🔴 | 🔴 | 🔴</div>
+                <div class="grid" style="grid-template-columns: repeat(3, 1fr); margin-top:6px;">
+                    <button class="btn-sm" onclick="spinRoulette('red')" style="background:#ff0055; color:#fff;">Червоне (x2)</button>
+                    <button class="btn-sm" onclick="spinRoulette('black')" style="background:#333; color:#fff; border:1px solid #777;">Чорне (x2)</button>
+                    <button class="btn-sm" onclick="spinRoulette('green')" style="background:#00ff66; color:#000;">Зеро (x14)</button>
+                </div>
+            </div>
+
+            <p id="lres" style="margin-top:4px; color:#00ff66; text-align:center; font-weight:bold; font-size:11px;"></p>
+            <div style="flex-grow:1;"></div>
+            <button class="btn-act" onclick="nav('street')">🚶 На вулицю</button>
+        </div>
+
+        <!-- 7. КОЛЕДЖ -->
+        <div id="college" class="screen">
+            <h2>🎓 Коледж</h2>
+            <p id="college-msg">Пари йдуть з 09:00 до 15:00 (Пн-Пт).</p>
+            <button class="btn-sec" onclick="attendCollege()">📚 Відвідати пари (+2 год)</button>
+            <div style="flex-grow:1;"></div>
+            <button class="btn-act" onclick="nav('street')">🚶 На вулицю</button>
+        </div>
+
+        <!-- 8. РОБОТА ТА МІНІ-ІГРИ -->
+        <div id="work" class="screen">
+            <h2>🛠️ Біржа праці</h2>
+            <p id="work-info">Вибери підробіток:</p>
+            <button class="btn-sec" onclick="startWork('janitor')">🧹 Дворнік (+90 грн, 2 год)</button>
+            <button class="btn-sec" onclick="startWork('washer')">🚗 Автомийка (+140 грн, 3 год)</button>
+            
+            <div id="mini-game" class="mini-box" style="display:none;">
+                <p id="mg-text" style="color:#00ff66;">Тисни кнопку прибирання!</p>
+                <h3 id="mg-count" style="margin:6px 0;">0 / 6</h3>
+                <button class="btn-act" onclick="progressGame()">Дія!</button>
+            </div>
+
+            <div style="flex-grow:1;"></div>
+            <button class="btn-act" onclick="nav('street')">🚶 На вулицю</button>
+        </div>
+
+        <!-- 9. РИБАЛКА -->
+        <div id="fish" class="screen">
+            <h2>🎣 Рибалка</h2>
+            <p id="fmsg">Закинь вудку (-1 год)!</p>
+            <button id="fbtn" onclick="fish()">🎣 Закинути</button>
+            <div style="flex-grow:1;"></div>
+            <button class="btn-act" onclick="nav('street')">🚶 На вулицю</button>
+        </div>
+    </div>
+</div>
+
+<!-- МОДАЛКА ДИВНОГО БАРИГИ -->
+<div id="dealer-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:100; justify-content:center; align-items:center;">
+    <div style="background:#1c1c24; border:2px solid #ff0055; padding:15px; border-radius:12px; width:90%; max-width:320px; text-align:center;">
+        <h3 style="color:#ff0055; margin-bottom:5px;">🕶️ Дивний Барига</h3>
+        <p style="font-size:11px; color:#aaa; margin-bottom:10px;">"Йоу чувак! Не хочеш залізо по дешману взяти?"</p>
+        <button class="btn-sm" onclick="dealerDeal(true)" style="background:#00ff66; margin-bottom:4px;">💳 Купити за 100 FPS</button>
+        <button class="btn-sm" onclick="dealerDeal(false)" style="background:#ff0055; color:#fff;">❌ Послати його</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
